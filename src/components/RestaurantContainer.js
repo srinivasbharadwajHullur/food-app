@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import useFetchRestaurants from "../utils/useFetchRestaurants";
 import ItemCard from "./ItemCard";
 import ButtonList from "./ButtonList";
+import { useNavigate } from "react-router-dom";
 
 const RestaurantContainer = () => {
+  const navigate = useNavigate();
   const { loading, error, restaurants } = useFetchRestaurants();
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [search, setSearch] = useState("");
@@ -39,12 +41,16 @@ const RestaurantContainer = () => {
       filterFunction: (restaurant) => restaurant.info.avgRating > 4.0,
     },
     {
-      label: "Less than 400",
+      label: "Less than Rs 400",
       filterFunction: (restaurant) =>
         restaurant.info.feeDetails.totalFee / 10 < 400,
     },
   ];
 
+  const handleClicks = (id) => {
+    navigate("/restaurantmenu/" + id)
+  }
+  
   return (
     <div className="mt-5">
       <h1 className="font-bold">Restaurants with online food delivery</h1>
@@ -66,21 +72,24 @@ const RestaurantContainer = () => {
         />
       </div>
       <div className="mt-2 grid grid-cols-4 gap-4">
-        {filteredRestaurants.length > 0
+      {filteredRestaurants.length > 0
           ? filteredRestaurants.map((restaurantData) => {
               return (
-                <ItemCard
-                  restaurantData={restaurantData.info}
+                <div
                   key={restaurantData.info.id}
-                />
+                >
+                  <ItemCard restaurantData={restaurantData.info} />
+                </div>
               );
             })
           : restaurants.map((restaurantData) => {
               return (
-                <ItemCard
-                  restaurantData={restaurantData.info}
+                <div
                   key={restaurantData.info.id}
-                />
+                  onClick={() => handleClicks(restaurantData.info.id)}
+                >
+                  <ItemCard restaurantData={restaurantData.info} />
+                </div>
               );
             })}
       </div>
