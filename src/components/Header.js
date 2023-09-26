@@ -1,7 +1,12 @@
 import React from "react";
 import { LOGO_URI, USER_ICON, CART_URI } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const goToHome = () => {
+    navigate("/")
+  }
   return (
     <div className="flex justify-around items-center shadow-md">
       <div className="flex items-center">
@@ -9,6 +14,7 @@ const Header = () => {
           className="w-20 cursor-pointer mr-2"
           src={LOGO_URI}
           alt="App Logo"
+          onClick={goToHome}
         />
         <p className="underline font-semibold cursor-pointer hover:text-orange-400 mr-2">
           Home
