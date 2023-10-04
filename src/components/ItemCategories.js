@@ -1,11 +1,23 @@
 import React from 'react';
 import { RESTAURANT_ITEM_IMAGE_URI } from '../utils/constants';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../features/cartSlice';
+
 
 const ItemCategories = ({ restaurantData }) => {
+  const dispatch = useDispatch();
   if (!restaurantData) {
     return null;
   }
 
+  const addItemsToCart = (item) => {
+    const quantity = 1
+    dispatch(addToCart({item,quantity}))
+    toast("Item added to cart")
+  }
+  
   return (
     <div>
       {restaurantData.map((restaurant) => {
@@ -29,13 +41,14 @@ const ItemCategories = ({ restaurantData }) => {
                 src={RESTAURANT_ITEM_IMAGE_URI + restaurant.card.info.imageId}
                 alt="Restaurant Menu Item"
               />
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2 w-28">
+              <button onClick={() => addItemsToCart(restaurant.card.info)} className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2 w-28">
                 Add
               </button>
             </div>
           </div>
         );
       })}
+      <ToastContainer />
     </div>
   );
 };
