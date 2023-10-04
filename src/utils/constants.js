@@ -11,3 +11,4 @@ export const RESTAURANT_MENU_URI = "https://www.swiggy.com/dapi/menu/pl?page-typ
 export const UP_ARROW_URI = "https://cdn-icons-png.flaticon.com/512/60/60564.png"
 export const DOWN_ARROW_URI = "https://cdn-icons-png.flaticon.com/512/159/159119.png"
 export const RESTAURANT_ITEM_IMAGE_URI = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/"
+export const CART_ITEM_IMAGE_URI = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/"
